@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "My Svelte Extension",
+  "version": "1.0.0",
+  "description": "A browser extension built with Svelte and Tailwind",
+  "permissions": [],
+  "action": {
+    "default_popup": "dist/views/index.html"
+  },
+  "host_permissions": []
+}
