@@ -15,4 +15,9 @@
     "storage"
   ],
   "host_permissions": [],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{b51ef2db-e5c4-47b6-b5a5-ee2cb5641331}"
+    }
+  }
 }
