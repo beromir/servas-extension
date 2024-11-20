@@ -5,7 +5,7 @@
   "description": "A browser extension built with Svelte and Tailwind",
   "permissions": [],
   "action": {
-    "default_popup": "dist/views/index.html"
+    "default_popup": "dist/views/popup.html"
   },
   "host_permissions": []
 }
