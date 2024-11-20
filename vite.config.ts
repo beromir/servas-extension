@@ -10,6 +10,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 popup: resolve(__dirname, 'views/popup.html'),
+                settings: resolve(__dirname, 'views/settings.html'),
             },
         },
         assetsDir: 'assets',

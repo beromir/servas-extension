@@ -3,9 +3,16 @@
   "name": "My Svelte Extension",
   "version": "1.0.0",
   "description": "A browser extension built with Svelte and Tailwind",
-  "permissions": [],
   "action": {
     "default_popup": "dist/views/popup.html"
   },
-  "host_permissions": []
+  "options_ui": {
+    "page": "dist/views/settings.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [],
 }
