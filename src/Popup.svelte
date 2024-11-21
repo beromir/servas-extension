@@ -1,6 +1,16 @@
 <script lang="ts">
+    import {getCurrentTab} from "./services/tab";
+    import {storeLink} from "./services/api";
+
+    async function handleClick() {
+        const tab = await getCurrentTab();
+
+        storeLink(tab);
+    }
 </script>
 
-<main>
-  <h1>Servas</h1>
-</main>
+<div class="p-6">
+
+    <button on:click={handleClick} type="button">Add</button>
+
+</div>
