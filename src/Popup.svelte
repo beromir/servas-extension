@@ -12,7 +12,9 @@
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
-    let options: any;
+    let title: string = $state('');
+
+    let options: any = $state();
 
     function handleSettingsButtonClick() {
         if (browserAPI.runtime.openOptionsPage) {
@@ -25,7 +27,7 @@
     async function handleAddPageButtonClick() {
         const tab = await getCurrentTab();
 
-        await storeLink(tab);
+        await storeLink(tab, title);
     }
 
     onMount(async () => {
@@ -41,7 +43,7 @@
 
 <div class="flex flex-col p-2 h-screen">
     <header class="flex items-center justify-between">
-        <button on:click={handleSettingsButtonClick} type="button" title="Settings">
+        <button onclick={handleSettingsButtonClick} type="button" title="Settings">
             <CogSixTooth className="fill-gray-500 hover:fill-gray-700"/>
         </button>
 
@@ -54,7 +56,7 @@
 
     <main class="flex flex-col justify-between grow">
         <div>
-
+            <input bind:value={title} type="text" placeholder="Title"/>
         </div>
 
         <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}

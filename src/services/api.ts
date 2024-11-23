@@ -12,8 +12,8 @@ export function getGroups(): object[] {
     return [];
 }
 
-export async function storeLink(tab: object): Promise<void> {
-    let data: { link: any; title: any } = {link: tab.url, title: tab.title};
+export async function storeLink(tab: object, title: string = ''): Promise<void> {
+    let data: { link: string; title: string } = {link: tab.url, title: title ? title : tab.title};
 
     const storageData = await browserAPI.storage.sync.get({
         servasUrl: '',
