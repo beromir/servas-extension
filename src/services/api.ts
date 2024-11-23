@@ -21,7 +21,6 @@ export async function storeLink(tab: object): Promise<void> {
     });
 
     if ((storageData.servasUrl === '') || (storageData.apiToken === '')) {
-        //showResponseMessage('wrong settings');
         return;
     }
 
@@ -35,12 +34,19 @@ export async function storeLink(tab: object): Promise<void> {
     }).catch(error => {
         console.error(error);
 
-        dispatchCustomEvent('notify', {message: 'fuck off', style: 'danger'});
+        dispatchCustomEvent('notify', {message: 'There was an error', style: 'danger'});
     });
 
-    if (response?.ok) {
-        dispatchCustomEvent('notify', {message: 'Page added', style: 'success'});
-    } else if (!response?.ok) {
-        dispatchCustomEvent('notify', {message: 'There was an error', style: 'danger'});
+    if (response instanceof Response) {
+        switch (response.status) {
+            case 200:
+                dispatchCustomEvent('notify', {message: 'Page added', style: 'success'});
+                break;
+            case 422:
+                dispatchCustomEvent('notify', {message: 'The page was already added', style: 'info'});
+                break;
+            default:
+                dispatchCustomEvent('notify', {message: 'There was an error', style: 'danger'});
+        }
     }
 }
