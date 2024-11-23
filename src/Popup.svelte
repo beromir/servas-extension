@@ -6,6 +6,7 @@
     import Plus from "./heroicons/mini/Plus.svelte";
     import {getCurrentTab} from "./services/tab";
     import {storeLink} from "./services/api";
+    import Notification from "./components/Notification.svelte";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
@@ -49,4 +50,6 @@
             Add page
         </Button>
     </main>
+
+    <Notification/>
 </div>

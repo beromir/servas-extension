@@ -1,3 +1,5 @@
+import {dispatchCustomEvent} from "../utils/util";
+
 const browserAPI = globalThis.chrome || globalThis.browser;
 
 export function getTags(): object[] {
@@ -23,7 +25,7 @@ export async function storeLink(tab: object): Promise<void> {
         return;
     }
 
-    const response = await fetch(`${storageData.servasUrl}/api/links`, {
+    const response: Response | void = await fetch(`${storageData.servasUrl}/api/links`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -32,5 +34,13 @@ export async function storeLink(tab: object): Promise<void> {
         body: JSON.stringify(data),
     }).catch(error => {
         console.error(error);
+
+        dispatchCustomEvent('notify', {message: 'fuck off', style: 'danger'});
     });
+
+    if (response?.ok) {
+        dispatchCustomEvent('notify', {message: 'Page added', style: 'success'});
+    } else if (!response?.ok) {
+        dispatchCustomEvent('notify', {message: 'There was an error', style: 'danger'});
+    }
 }
