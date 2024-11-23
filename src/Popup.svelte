@@ -2,6 +2,10 @@
     import ArrowTopRightOnSquare from "./heroicons/micro/ArrowTopRightOnSquare.svelte";
     import CogSixTooth from "./heroicons/micro/CogSixTooth.svelte";
     import {getOptions} from "./services/option";
+    import Button from "./components/Button.svelte";
+    import Plus from "./heroicons/mini/Plus.svelte";
+    import {getCurrentTab} from "./services/tab";
+    import {storeLink} from "./services/api";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
@@ -14,9 +18,15 @@
             window.open(browserAPI.runtime.getURL('dist/views/settings.html'));
         }
     }
+
+    async function handleAddPageButtonClick() {
+        const tab = await getCurrentTab();
+
+        await storeLink(tab);
+    }
 </script>
 
-<div class="p-2">
+<div class="flex flex-col p-2 h-screen">
     <header class="flex items-center justify-between">
         <button on:click={handleSettingsButtonClick} type="button" title="Settings">
             <CogSixTooth className="fill-gray-500 hover:fill-gray-700"/>
@@ -28,4 +38,15 @@
             </a>
         {/await}
     </header>
+
+    <main class="flex flex-col justify-between grow">
+        <div>
+
+        </div>
+
+        <Button onclick={handleAddPageButtonClick} color="primary" class="flex! mx-auto">
+            <Plus/>
+            Add page
+        </Button>
+    </main>
 </div>

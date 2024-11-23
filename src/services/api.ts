@@ -1,3 +1,5 @@
+const browserAPI = globalThis.chrome || globalThis.browser;
+
 export function getTags(): object[] {
 
     return [];
@@ -8,15 +10,12 @@ export function getGroups(): object[] {
     return [];
 }
 
-export async function storeLink(tab: object): void {
-    let data = {link: tab.url, title: tab.title};
-    let storageData = null;
+export async function storeLink(tab: object): Promise<void> {
+    let data: { link: any; title: any } = {link: tab.url, title: tab.title};
 
-    await browser.storage.sync.get({
+    const storageData = await browserAPI.storage.sync.get({
         servasUrl: '',
         apiToken: '',
-    }).then(value => {
-        storageData = value;
     });
 
     if ((storageData.servasUrl === '') || (storageData.apiToken === '')) {
@@ -24,22 +23,14 @@ export async function storeLink(tab: object): void {
         return;
     }
 
-    fetch(`${storageData.servasUrl}/api/links`, {
+    const response = await fetch(`${storageData.servasUrl}/api/links`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${storageData.apiToken}`,
         },
         body: JSON.stringify(data),
-    })
-        .then(response => {
-            if (response.ok) {
-                //showResponseMessage('ok');
-            } else {
-                //showResponseMessage('error');
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    }).catch(error => {
+        console.error(error);
+    });
 }
