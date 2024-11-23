@@ -8,7 +8,7 @@
   },
   "options_ui": {
     "page": "dist/views/settings.html",
-    "open_in_tab": false
+    "open_in_tab": true
   },
   "permissions": [
     "activeTab",
