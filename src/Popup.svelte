@@ -5,7 +5,7 @@
     import Button from "./components/Button.svelte";
     import Plus from "./heroicons/mini/Plus.svelte";
     import {getCurrentTab} from "./services/tab";
-    import {storeLink} from "./services/api";
+    import {getData, storeLink} from "./services/api";
     import Notification from "./components/Notification.svelte";
     import {onMount} from "svelte";
     import {dispatchCustomEvent} from "./utils/util";
@@ -13,8 +13,9 @@
     const browserAPI = globalThis.chrome || globalThis.browser;
 
     let title: string = $state('');
-
     let options: any = $state();
+    let tags: any = $state([]);
+    let groups: any = $state([]);
 
     function handleSettingsButtonClick() {
         if (browserAPI.runtime.openOptionsPage) {
@@ -38,25 +39,43 @@
         if (!result.servasUrl || !result.apiToken) {
             dispatchCustomEvent('notify', {message: 'Missing settings', style: 'warning', permanent: true});
         }
+
+        tags = await getData('all-tags');
+        groups = await getData('all-groups');
     })
 </script>
 
 <div class="flex flex-col p-2 h-screen">
     <header class="flex items-center justify-between">
         <button onclick={handleSettingsButtonClick} type="button" title="Settings">
-            <CogSixTooth className="fill-gray-500 hover:fill-gray-700"/>
+            <CogSixTooth className="fill-gray-500 hover:fill-gray-700 dark:fill-gray-400"/>
         </button>
 
         {#if options?.servasUrl}
             <a href={options.servasUrl} title="Open Servas">
-                <ArrowTopRightOnSquare className="size-4.5 fill-gray-500 hover:fill-gray-700"/>
+                <ArrowTopRightOnSquare className="size-4.5 fill-gray-500 hover:fill-gray-700 dark:fill-gray-400"/>
             </a>
         {/if}
     </header>
 
-    <main class="flex flex-col justify-between grow">
-        <div>
-            <input bind:value={title} type="text" placeholder="Title"/>
+    <main class="flex flex-col justify-between grow mt-4">
+        <div class="space-y-3">
+            <input bind:value={title} type="text" placeholder="Title"
+                   class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded"/>
+
+            <select
+                class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded">
+                {#each tags as tag}
+                    <option value={tag.id}>{tag.name}</option>
+                {/each}
+            </select>
+
+            <select
+                class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded">
+                {#each groups as group}
+                    <option value={group.id}>{group.title}</option>
+                {/each}
+            </select>
         </div>
 
         <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}
