@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@plugin '@tailwindcss/forms';
+
 @theme {
     --color-primary-50: hsl(221 68 93);
     --color-primary-100: hsl(221 78 86);
