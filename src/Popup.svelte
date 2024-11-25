@@ -9,6 +9,7 @@
     import Notification from "./components/Notification.svelte";
     import {onMount} from "svelte";
     import {dispatchCustomEvent} from "./utils/util";
+    import Combobox from "./components/Combobox.svelte";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
@@ -63,19 +64,9 @@
             <input bind:value={title} type="text" placeholder="Title"
                    class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded"/>
 
-            <select
-                class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded">
-                {#each tags as tag}
-                    <option value={tag.id}>{tag.name}</option>
-                {/each}
-            </select>
+            <Combobox options={tags} titleProperty="name"/>
 
-            <select
-                class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded">
-                {#each groups as group}
-                    <option value={group.id}>{group.title}</option>
-                {/each}
-            </select>
+            <Combobox options={groups}/>
         </div>
 
         <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}
