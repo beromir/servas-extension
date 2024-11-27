@@ -14,12 +14,10 @@
 
     let showDropdown: boolean = $state(false);
     let searchString: string = $state('');
-
-    let input: HTMLInputElement;
 </script>
 
 <div use:clickOutside={() => showDropdown = false} class="relative">
-    <input bind:this={input} bind:value={searchString} onfocusin={() => showDropdown = true} type="text" placeholder="Search..."
+    <input bind:value={searchString} onfocusin={() => showDropdown = true} type="text" placeholder="Search..."
            class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded"
            role="combobox" aria-controls="options" aria-expanded="false">
     <button onclick={() => showDropdown = false} type="button" aria-label="Show dropdown"
