@@ -17,6 +17,8 @@
     let options: any = $state();
     let tags: any = $state([]);
     let groups: any = $state([]);
+    let selectedTags: any = $state([]);
+    let selectedGroups: any = $state([]);
 
     function handleSettingsButtonClick() {
         if (browserAPI.runtime.openOptionsPage) {
@@ -29,7 +31,7 @@
     async function handleAddPageButtonClick() {
         const tab = await getCurrentTab();
 
-        await storeLink(tab, title);
+        await storeLink(tab, title, selectedGroups, selectedTags);
     }
 
     onMount(async () => {
@@ -64,9 +66,9 @@
             <input bind:value={title} type="text" placeholder="Title"
                    class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded"/>
 
-            <Combobox options={tags} titleProperty="name"/>
+            <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name"/>
 
-            <Combobox options={groups}/>
+            <Combobox bind:selectedOptions={selectedGroups} options={groups}/>
         </div>
 
         <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}

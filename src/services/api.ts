@@ -29,13 +29,13 @@ export async function getData(path: string): Promise<void> {
     }
 }
 
-export function getGroups(): object[] {
-
-    return [];
-}
-
-export async function storeLink(tab: object, title: string = ''): Promise<void> {
-    let data: { link: string; title: string } = {link: tab.url, title: title ? title : tab.title};
+export async function storeLink(tab: object, title: string = '', groups: number[] = [], tags: number[] = []): Promise<void> {
+    let data: { link: string; title: string, groups: number[], tags: number[] } = {
+        link: tab.url,
+        title: title ? title : tab.title,
+        groups,
+        tags
+    };
 
     const storageData = await browserAPI.storage.sync.get({
         servasUrl: '',
