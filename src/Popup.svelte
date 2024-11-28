@@ -19,6 +19,7 @@
     let groups: any = $state([]);
     let selectedTags: any = $state([]);
     let selectedGroups: any = $state([]);
+    let tab: any;
 
     function handleSettingsButtonClick() {
         if (browserAPI.runtime.openOptionsPage) {
@@ -29,15 +30,16 @@
     }
 
     async function handleAddPageButtonClick() {
-        const tab = await getCurrentTab();
-
         await storeLink(tab, title, selectedGroups, selectedTags);
     }
 
     onMount(async () => {
         const result = await getOptions();
+        const tabResult = await getCurrentTab();
 
         options = result;
+        tab = tabResult;
+        title = tab.title;
 
         if (!result.servasUrl || !result.apiToken) {
             dispatchCustomEvent('notify', {message: 'Missing settings', style: 'warning', permanent: true});
