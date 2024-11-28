@@ -48,7 +48,7 @@
     })
 </script>
 
-<div class="flex flex-col p-2 h-screen">
+<div class="flex flex-col p-3 h-screen">
     <header class="flex items-center justify-between">
         <button onclick={handleSettingsButtonClick} type="button" title="Settings">
             <CogSixTooth className="fill-gray-500 hover:fill-gray-700 dark:fill-gray-400"/>
@@ -66,9 +66,10 @@
             <input bind:value={title} type="text" placeholder="Title"
                    class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded"/>
 
-            <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name"/>
+            <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name"
+                      placeholder="Search tags..."/>
 
-            <Combobox bind:selectedOptions={selectedGroups} options={groups}/>
+            <Combobox bind:selectedOptions={selectedGroups} options={groups} placeholder="Search groups..."/>
         </div>
 
         <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}

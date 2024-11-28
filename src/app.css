@@ -14,3 +14,7 @@
     --color-primary-800: hsl(232 51 36);
     --color-primary-900: hsl(234 62 26);
 }
+
+@utility ring-contrast {
+    @apply dark:ring-1 dark:ring-white/15;
+}
