@@ -22,6 +22,17 @@
     let filteredOptions: any[] = $derived(options.filter(option => option[titleProperty].toLowerCase().includes(searchString.toLowerCase())));
 </script>
 
+{#if selectedOptions.length}
+    <div class="mb-3">
+        {#each selectedOptions as optionId}
+            <button onclick={() => selectedOptions = toggleArrayValue(selectedOptions, optionId)} type="button"
+                    class="mr-3 mt-1.5 text-gray-100">
+                {options.find(option => option.id === optionId)[titleProperty]}
+            </button>
+        {/each}
+    </div>
+{/if}
+
 <div use:clickOutside={() => showDropdown = false} class="relative">
     <Input bind:value={searchString} onfocusin={() => showDropdown = true} placeholder={placeholder}/>
     <button onclick={() => showDropdown = false} type="button" aria-label="Show dropdown"
