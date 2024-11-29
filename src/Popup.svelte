@@ -10,6 +10,7 @@
     import {onMount} from "svelte";
     import {dispatchCustomEvent} from "./utils/util";
     import Combobox from "./components/Combobox.svelte";
+    import Input from "./components/Input.svelte";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
@@ -65,8 +66,7 @@
 
     <main class="flex flex-col justify-between grow mt-4">
         <div class="space-y-3">
-            <input bind:value={title} type="text" placeholder="Title"
-                   class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded"/>
+            <Input bind:value={title} placeholder="Title"/>
 
             <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name"
                       placeholder="Search tags..."/>

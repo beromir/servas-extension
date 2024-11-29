@@ -3,6 +3,7 @@
     import {clickOutside} from "../actions/action";
     import ChevronUpDown from "../heroicons/micro/ChevronUpDown.svelte";
     import Check from "../heroicons/micro/Check.svelte";
+    import Input from "./Input.svelte";
 
     let {
         options = [],
@@ -22,8 +23,7 @@
 </script>
 
 <div use:clickOutside={() => showDropdown = false} class="relative">
-    <input bind:value={searchString} onfocusin={() => showDropdown = true} type="text" placeholder={placeholder}
-           class="px-2 py-1 w-full min-w-none bg-gray-800 text-sm text-white placeholder-gray-400 border-gray-600 rounded focus:border-gray-500 focus:ring-0">
+    <Input bind:value={searchString} onfocusin={() => showDropdown = true} placeholder={placeholder}/>
     <button onclick={() => showDropdown = false} type="button" aria-label="Show dropdown"
             class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none"
             class:pointer-events-none={!showDropdown}>
