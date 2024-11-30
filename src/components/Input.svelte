@@ -13,7 +13,7 @@
 
     const styles: string[] = [
         'px-2 py-1 w-full min-w-none text-sm rounded focus:ring-0',
-        'bg-gray-100 placeholder-gray-500 border-gray-300 focus:border-gray-400',
+        'bg-gray-100 placeholder-gray-500 border-gray-300 focus:border-primary-300',
         'dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:border-gray-600'
     ]
 </script>
