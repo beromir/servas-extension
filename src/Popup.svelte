@@ -1,7 +1,7 @@
 <script lang="ts">
     import ArrowTopRightOnSquare from "./heroicons/micro/ArrowTopRightOnSquare.svelte";
     import CogSixTooth from "./heroicons/micro/CogSixTooth.svelte";
-    import {getOptions} from "./services/option";
+    import {getLocalOptions, getOptions, setLocalOption} from "./services/option";
     import Button from "./components/Button.svelte";
     import Plus from "./heroicons/mini/Plus.svelte";
     import {getCurrentTab} from "./services/tab";
@@ -25,11 +25,6 @@
     let showOptions: boolean = $state(false);
     let tab: any;
 
-    $effect(() => {
-        document.body.classList.toggle('w-72!', showOptions);
-        document.body.classList.toggle('h-108!', showOptions);
-    });
-
     function handleSettingsButtonClick() {
         if (browserAPI.runtime.openOptionsPage) {
             browserAPI.runtime.openOptionsPage();
@@ -42,13 +37,28 @@
         await storeLink(tab, title, selectedGroups, selectedTags);
     }
 
+    async function handleToggleOptionsButtonClick() {
+        showOptions = !showOptions
+        await setLocalOption('showOptions', showOptions);
+
+        resizePopup();
+    }
+
+    function resizePopup() {
+        document.body.classList.toggle('w-72!', showOptions);
+        document.body.classList.toggle('h-108!', showOptions);
+    }
+
     onMount(async () => {
         const result = await getOptions();
         const tabResult = await getCurrentTab();
+        const localOptionsResult = await getLocalOptions();
 
         options = result;
         tab = tabResult;
         title = tab.title;
+        showOptions = localOptionsResult.showOptions ?? false;
+        localOptionsResult && resizePopup();
 
         if (!result.servasUrl || !result.apiToken) {
             dispatchCustomEvent('notify', {message: 'Missing settings', style: 'warning', permanent: true});
@@ -96,7 +106,7 @@
                 Add page
             </Button>
 
-            <button onclick={() => showOptions = !showOptions} type="button"
+            <button onclick={handleToggleOptionsButtonClick} type="button"
                     class="flex items-center gap-x-1 text-sm text-gray-600 font-medium tracking-tight group hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-500">
                 {#if showOptions}
                     <Minus className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-400 dark:group-hover:fill-gray-500"/>
