@@ -13,8 +13,25 @@
     --color-primary-700: hsl(230 49 41);
     --color-primary-800: hsl(232 51 36);
     --color-primary-900: hsl(234 62 26);
+
+    --font-sans: "InterVariable", "sans-serif";
 }
 
 @utility ring-contrast {
     @apply dark:ring-1 dark:ring-white/15;
+}
+
+@font-face {
+    font-family: InterVariable;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../assets/fonts/inter/InterVariable.woff2") format("woff2");
+}
+@font-face {
+    font-family: InterVariable;
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../assets/fonts/inter/InterVariable-Italic.woff2") format("woff2");
 }
