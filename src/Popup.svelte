@@ -11,6 +11,8 @@
     import {dispatchCustomEvent} from "./utils/util";
     import Combobox from "./components/Combobox.svelte";
     import Input from "./components/Input.svelte";
+    import PlusMicro from "./heroicons/micro/Plus.svelte";
+    import Minus from "./heroicons/micro/Minus.svelte";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
@@ -20,7 +22,13 @@
     let groups: any = $state([]);
     let selectedTags: any = $state([]);
     let selectedGroups: any = $state([]);
+    let showOptions: boolean = $state(false);
     let tab: any;
+
+    $effect(() => {
+        document.body.classList.toggle('w-72!', showOptions);
+        document.body.classList.toggle('h-100!', showOptions);
+    });
 
     function handleSettingsButtonClick() {
         if (browserAPI.runtime.openOptionsPage) {
@@ -65,21 +73,40 @@
     </header>
 
     <main class="flex flex-col justify-between grow mt-5">
-        <div class="space-y-4">
-            <Input bind:value={title} id="title" label="Title" placeholder="Title"/>
+        {#if showOptions}
+            <div class="space-y-4">
+                <Input bind:value={title} id="title" label="Title" placeholder="Title"/>
 
-            <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name" id="tags" label="Tags"
-                      placeholder="Search tags..."/>
+                <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name" id="tags" label="Tags"
+                          placeholder="Search tags..."/>
 
-            <Combobox bind:selectedOptions={selectedGroups} options={groups} id="groups" label="Groups"
-                      placeholder="Search groups..." dropdownTop={true}/>
+                <Combobox bind:selectedOptions={selectedGroups} options={groups} id="groups" label="Groups"
+                          placeholder="Search groups..." dropdownTop={true}/>
+            </div>
+
+        {:else}
+            <div></div>
+        {/if}
+
+        <div class="flex flex-col items-center gap-y-5">
+            <Button onclick={handleAddPageButtonClick} color="primary"
+                    disabled={!options?.servasUrl || !options?.apiToken}
+                    class="">
+                <Plus/>
+                Add page
+            </Button>
+
+            <button onclick={() => showOptions = !showOptions} type="button"
+                    class="flex items-center gap-x-1 text-sm text-gray-600 font-medium tracking-tight group hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-400">
+                {#if showOptions}
+                    <Minus className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-400 dark:group-hover:fill-gray-500"/>
+
+                {:else}
+                    <PlusMicro className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-300 dark:group-hover:fill-gray-400"/>
+                {/if}
+                {showOptions ? 'Hide options' : 'Show options'}
+            </button>
         </div>
-
-        <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}
-                class="flex! mx-auto">
-            <Plus/>
-            Add page
-        </Button>
     </main>
 
     <Notification/>
