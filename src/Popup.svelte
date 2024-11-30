@@ -27,7 +27,7 @@
 
     $effect(() => {
         document.body.classList.toggle('w-72!', showOptions);
-        document.body.classList.toggle('h-100!', showOptions);
+        document.body.classList.toggle('h-108!', showOptions);
     });
 
     function handleSettingsButtonClick() {
@@ -62,12 +62,12 @@
 <div class="flex flex-col p-3 h-screen">
     <header class="flex items-center justify-between">
         <button onclick={handleSettingsButtonClick} type="button" title="Settings">
-            <CogSixTooth className="fill-gray-500 hover:fill-gray-700 dark:fill-gray-400"/>
+            <CogSixTooth className="fill-gray-500 hover:fill-gray-700 dark:fill-gray-400 dark:hover:fill-gray-200"/>
         </button>
 
         {#if options?.servasUrl}
             <a href={options.servasUrl} title="Open Servas">
-                <ArrowTopRightOnSquare className="size-4.5 fill-gray-500 hover:fill-gray-700 dark:fill-gray-400"/>
+                <ArrowTopRightOnSquare className="size-4.5 fill-gray-500 hover:fill-gray-700 dark:fill-gray-400 dark:hover:fill-gray-200"/>
             </a>
         {/if}
     </header>
@@ -97,12 +97,12 @@
             </Button>
 
             <button onclick={() => showOptions = !showOptions} type="button"
-                    class="flex items-center gap-x-1 text-sm text-gray-600 font-medium tracking-tight group hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-400">
+                    class="flex items-center gap-x-1 text-sm text-gray-600 font-medium tracking-tight group hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-500">
                 {#if showOptions}
                     <Minus className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-400 dark:group-hover:fill-gray-500"/>
 
                 {:else}
-                    <PlusMicro className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-300 dark:group-hover:fill-gray-400"/>
+                    <PlusMicro className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-400 dark:group-hover:fill-gray-500"/>
                 {/if}
                 {showOptions ? 'Hide options' : 'Show options'}
             </button>

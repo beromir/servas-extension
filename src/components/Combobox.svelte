@@ -40,8 +40,8 @@
         <div class="mt-0.5 mb-0">
             {#each selectedOptions as optionId}
                 <button onclick={() => selectedOptions = toggleArrayValue(selectedOptions, optionId)} type="button"
-                        class="inline-flex items-center gap-x-0.5 mr-1.5 text-xs text-gray-700 font-semibold group dark:text-gray-100">
-                    <XMark className="size-3.5! fill-gray-500 group-hover:fill-gray-700"/>
+                        class="inline-flex items-center gap-x-0.5 mr-1.5 text-xs text-gray-700 font-semibold group dark:text-gray-300">
+                    <XMark className="size-3.5! fill-gray-500 group-hover:fill-gray-700 dark:fill-gray-400 dark:group-hover:fill-gray-500"/>
                     {options.find(option => option.id === optionId)[titleProperty]}
                 </button>
             {/each}
@@ -58,7 +58,7 @@
 
         {#if showDropdown}
             <ul class={clsx(
-                    'absolute z-10 mt-1 max-h-36 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none',
+                    'absolute z-10 mt-1 max-h-44 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none',
                     'dark:bg-gray-950 dark:ring-contrast',
                     dropdownTop ? 'bottom-9' : '',
                 )}>
