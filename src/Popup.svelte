@@ -72,7 +72,7 @@
                       placeholder="Search tags..."/>
 
             <Combobox bind:selectedOptions={selectedGroups} options={groups} id="groups" label="Groups"
-                      placeholder="Search groups..."/>
+                      placeholder="Search groups..." dropdownTop={true}/>
         </div>
 
         <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}

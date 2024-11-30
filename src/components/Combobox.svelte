@@ -6,6 +6,7 @@
     import Input from "./Input.svelte";
     import Label from "./Label.svelte";
     import XMark from "../heroicons/micro/XMark.svelte";
+    import clsx from "clsx";
 
     let {
         options = [],
@@ -14,6 +15,7 @@
         placeholder = 'Search...',
         id,
         label,
+        dropdownTop = false,
     }: {
         options: [],
         titleProperty?: string,
@@ -21,6 +23,7 @@
         placeholder?: string,
         id?: string,
         label?: string,
+        dropdownTop?: boolean,
     } = $props();
 
     let showDropdown: boolean = $state(false);
@@ -54,7 +57,11 @@
         </button>
 
         {#if showDropdown}
-            <ul class="absolute z-10 mt-1 max-h-36 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm dark:bg-gray-950 dark:ring-contrast">
+            <ul class={clsx(
+                    'absolute z-10 mt-1 max-h-36 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none',
+                    'dark:bg-gray-950 dark:ring-contrast',
+                    dropdownTop ? 'bottom-9' : '',
+                )}>
 
                 {#each filteredOptions as option}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions, a11y_click_events_have_key_events -->

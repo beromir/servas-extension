@@ -6,6 +6,6 @@
     let {children, ...props}: { for: string, children: Snippet, props?: HTMLLabelAttributes } = $props();
 </script>
 
-<label {...props} class={clsx(props.class, 'block mb-1 text-sm text-gray-600 font-medium')}>
+<label {...props} class={clsx(props.class, 'block mb-1 text-sm text-gray-700 font-medium')}>
     {@render children?.()}
 </label>
