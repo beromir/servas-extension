@@ -64,14 +64,15 @@
         {/if}
     </header>
 
-    <main class="flex flex-col justify-between grow mt-4">
-        <div class="space-y-3">
-            <Input bind:value={title} placeholder="Title"/>
+    <main class="flex flex-col justify-between grow mt-5">
+        <div class="space-y-4">
+            <Input bind:value={title} id="title" label="Title" placeholder="Title"/>
 
-            <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name"
+            <Combobox bind:selectedOptions={selectedTags} options={tags} titleProperty="name" id="tags" label="Tags"
                       placeholder="Search tags..."/>
 
-            <Combobox bind:selectedOptions={selectedGroups} options={groups} placeholder="Search groups..."/>
+            <Combobox bind:selectedOptions={selectedGroups} options={groups} id="groups" label="Groups"
+                      placeholder="Search groups..."/>
         </div>
 
         <Button onclick={handleAddPageButtonClick} color="primary" disabled={!options?.servasUrl || !options?.apiToken}
