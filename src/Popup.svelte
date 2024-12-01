@@ -13,6 +13,7 @@
     import Input from "./components/Input.svelte";
     import PlusMicro from "./heroicons/micro/Plus.svelte";
     import Minus from "./heroicons/micro/Minus.svelte";
+    import {initTheme} from "./services/theme";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
@@ -50,6 +51,8 @@
     }
 
     onMount(async () => {
+        await initTheme();
+
         const result = await getOptions();
         const tabResult = await getCurrentTab();
         const localOptionsResult = await getOptions('local');

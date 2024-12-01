@@ -5,9 +5,12 @@
     import {getOptions, setOption} from "./services/option";
     import Notification from "./components/Notification.svelte";
     import {dispatchCustomEvent} from "./utils/util";
+    import Select from "./components/Select.svelte";
+    import {changeTheme, initTheme} from "./services/theme.js";
 
     let servasUrl: string = $state('');
     let apiToken: string = $state('');
+    let theme: 'system' | 'dark' | 'light' = $state('system');
 
     async function handleSaveSettingsButtonClick() {
         const servasUrlResult = await setOption('servasUrl', servasUrl);
@@ -20,9 +23,17 @@
         }
     }
 
+    async function handleThemeSelect() {
+        await changeTheme(theme);
+
+        dispatchCustomEvent('notify', {message: 'Theme changed', style: 'success'});
+    }
+
     onMount(async () => {
+        const themeResult = await initTheme();
         const syncOptionsResult = await getOptions();
 
+        theme = themeResult;
         servasUrl = syncOptionsResult?.servasUrl ?? '';
         apiToken = syncOptionsResult?.apiToken ?? '';
     })
@@ -56,7 +67,11 @@
             </div>
 
             <div class="mt-6 space-y-5">
-
+                <Select bind:value={theme} onchange={handleThemeSelect} id="theme" label="Theme">
+                    <option value="system">System Theme</option>
+                    <option value="dark">Dark Theme</option>
+                    <option value="light">Light Theme</option>
+                </Select>
             </div>
         </section>
     </main>
