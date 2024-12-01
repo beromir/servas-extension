@@ -4,7 +4,7 @@
     import Label from "./Label.svelte";
 
     let {type = 'text', value = $bindable(''), id, label, ...props}: {
-        type: HTMLInputTypeAttribute,
+        type?: HTMLInputTypeAttribute,
         value: string,
         id?: string,
         label?: string,
