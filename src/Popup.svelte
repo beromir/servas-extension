@@ -1,7 +1,7 @@
 <script lang="ts">
     import ArrowTopRightOnSquare from "./heroicons/micro/ArrowTopRightOnSquare.svelte";
     import CogSixTooth from "./heroicons/micro/CogSixTooth.svelte";
-    import {getLocalOptions, getOptions, setLocalOption} from "./services/option";
+    import {getOptions, setOption} from "./services/option";
     import Button from "./components/Button.svelte";
     import Plus from "./heroicons/mini/Plus.svelte";
     import {getCurrentTab} from "./services/tab";
@@ -39,7 +39,7 @@
 
     async function handleToggleOptionsButtonClick() {
         showOptions = !showOptions
-        await setLocalOption('showOptions', showOptions);
+        await setOption('showOptions', showOptions, 'local');
 
         resizePopup();
     }
@@ -52,7 +52,7 @@
     onMount(async () => {
         const result = await getOptions();
         const tabResult = await getCurrentTab();
-        const localOptionsResult = await getLocalOptions();
+        const localOptionsResult = await getOptions('local');
 
         options = result;
         tab = tabResult;

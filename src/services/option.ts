@@ -1,19 +1,12 @@
 const browserAPI = globalThis.chrome || globalThis.browser;
 
-export async function getOptions() {
+export async function getOptions(storageLocation: 'sync' | 'local' = 'sync') {
     try {
-        return await browserAPI.storage.sync.get();
-    } catch (error) {
-        console.error('Error getting settings:', error);
-        return {};
-    }
-}
+        if (storageLocation === 'sync') {
+            return await browserAPI.storage.sync.get();
+        }
 
-export async function getLocalOptions() {
-    try {
-        const storage = browserAPI.storage.local;
-
-        return await storage.get();
+        return await browserAPI.storage.local.get();
     } catch (error) {
         console.error('Error getting options:', error);
 
@@ -21,10 +14,9 @@ export async function getLocalOptions() {
     }
 }
 
-export async function setLocalOption(key: string, value: any) {
+export async function setOption(key: string, value: any, storageLocation: 'sync' | 'local' = 'sync') {
     try {
-        // Handle both Chrome and Firefox
-        const storage = browserAPI.storage.local;
+        const storage = storageLocation === 'sync' ? browserAPI.storage.sync : browserAPI.storage.local;
         await storage.set({[key]: value});
 
         return true;

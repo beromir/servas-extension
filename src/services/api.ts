@@ -1,22 +1,20 @@
 import {dispatchCustomEvent} from "../utils/util";
+import {getOptions} from "./option";
 
 const browserAPI = globalThis.chrome || globalThis.browser;
 
 export async function getData(path: string): Promise<void> {
-    const storageData = await browserAPI.storage.sync.get({
-        servasUrl: '',
-        apiToken: '',
-    });
+    const options = await getOptions();
 
-    if ((storageData.servasUrl === '') || (storageData.apiToken === '')) {
+    if ((!options?.servasUrl) || (!options?.apiToken)) {
         return;
     }
 
-    const response: Response | void = await fetch(`${storageData.servasUrl}/api/${path}`, {
+    const response: Response | void = await fetch(`${options.servasUrl}/api/${path}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${storageData.apiToken}`,
+            'Authorization': `Bearer ${options.apiToken}`,
         },
     }).catch(error => {
         console.error(error);
@@ -37,20 +35,17 @@ export async function storeLink(tab: object, title: string = '', groups: number[
         tags
     };
 
-    const storageData = await browserAPI.storage.sync.get({
-        servasUrl: '',
-        apiToken: '',
-    });
+    const options = await getOptions();
 
-    if ((storageData.servasUrl === '') || (storageData.apiToken === '')) {
+    if ((!options?.servasUrl) || (!options?.apiToken)) {
         return;
     }
 
-    const response: Response | void = await fetch(`${storageData.servasUrl}/api/links`, {
+    const response: Response | void = await fetch(`${options.servasUrl}/api/links`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${storageData.apiToken}`,
+            'Authorization': `Bearer ${options.apiToken}`,
         },
         body: JSON.stringify(data),
     }).catch(error => {
