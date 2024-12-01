@@ -39,7 +39,7 @@
     })
 </script>
 
-<div class="relative mx-auto py-12 max-w-xl">
+<div class="relative mx-auto px-4 py-12 max-w-xl">
     <header>
         <h1 class="text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight dark:text-white">
             Servas Settings
@@ -48,8 +48,8 @@
 
     <main class="mt-10 space-y-10">
         <section>
-            <div class="border-b border-gray-200 pb-3">
-                <h2 class="text-base font-semibold text-gray-900">General</h2>
+            <div class="border-b border-gray-200 pb-3 dark:border-gray-700">
+                <h2 class="text-base font-semibold text-gray-900 dark:text-white">General</h2>
             </div>
 
             <div class="mt-6 space-y-5">
@@ -62,8 +62,8 @@
         </section>
 
         <section>
-            <div class="border-b border-gray-200 pb-3">
-                <h2 class="text-base font-semibold text-gray-900">Appearance</h2>
+            <div class="border-b border-gray-200 pb-3 dark:border-gray-700">
+                <h2 class="text-base font-semibold text-gray-900 dark:text-white">Appearance</h2>
             </div>
 
             <div class="mt-6 space-y-5">
