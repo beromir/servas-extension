@@ -2,6 +2,15 @@
 
 Browser extension for the self-hosted, open source bookmark manager [Servas](https://github.com/beromir/servas).
 
+## Features
+- Add current tab to Servas.
+- Add bookmark to groups and apply tags.
+- Dark and light theme.
+
+## Installation
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/servas)
+- Chrome (available soon)
+
 ## Development
 
 **Requirements**
