@@ -9,7 +9,7 @@ Browser extension for the self-hosted, open source bookmark manager [Servas](htt
 
 ## Installation
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/servas)
-- Chrome (available soon)
+- [Chrome](https://chromewebstore.google.com/detail/servas/ankaoihcpijhkbkfccncakngkfgahflp)
 
 ## Development
 
