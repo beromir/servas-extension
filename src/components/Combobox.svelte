@@ -29,6 +29,16 @@
     let showDropdown: boolean = $state(false);
     let searchString: string = $state('');
     let filteredOptions: any[] = $derived(options.filter(option => option[titleProperty].toLowerCase().includes(searchString.toLowerCase())));
+
+    function handleOptionSelect(optionId: string) {
+        selectedOptions = toggleArrayValue(selectedOptions, optionId);
+
+        searchString = '';
+
+        if (id) {
+            document.getElementById(id)?.focus();
+        }
+    }
 </script>
 
 <div>
@@ -65,19 +75,19 @@
 
                 {#each filteredOptions as option}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions, a11y_click_events_have_key_events -->
-                    <li onclick={() => selectedOptions = toggleArrayValue(selectedOptions, option.id)}
+                    <li onclick={() => handleOptionSelect(option.id)}
                         class="relative cursor-default select-none py-1 pl-7 pr-3 text-sm text-gray-900 hover:bg-gray-100 hover:text-black hover:outline-none dark:text-gray-100 dark:hover:bg-gray-900 dark:hover:text-white"
                         tabindex="-1">
-                    <span class="block truncate"
-                          class:font-semibold={selectedOptions.includes(option.id)}>
-                        {option[titleProperty]}
-                    </span>
+                        <span class="block truncate"
+                              class:font-semibold={selectedOptions.includes(option.id)}>
+                            {option[titleProperty]}
+                        </span>
 
                         {#if selectedOptions.includes(option.id)}
-                        <span
-                            class="absolute inset-y-0 left-0 flex items-center pl-1.5 text-gray-700 dark:text-gray-200">
-                            <Check/>
-                        </span>
+                            <span
+                                class="absolute inset-y-0 left-0 flex items-center pl-1.5 text-gray-700 dark:text-gray-200">
+                                <Check/>
+                            </span>
                         {/if}
                     </li>
 
