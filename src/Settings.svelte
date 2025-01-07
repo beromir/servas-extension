@@ -8,6 +8,8 @@
     import Select from "./components/Select.svelte";
     import {changeTheme, initTheme} from "./services/theme.js";
 
+    const browserAPI = globalThis.chrome || globalThis.browser;
+
     let servasUrl: string = $state('');
     let apiToken: string = $state('');
     let theme: 'system' | 'dark' | 'light' = $state('system');
@@ -75,6 +77,10 @@
             </div>
         </section>
     </main>
+
+    <footer class="mt-40 py-3 text-sm text-gray-700 border-t border-gray-300 dark:text-gray-300 dark:border-gray-600">
+        v{browserAPI.runtime.getManifest().version}
+    </footer>
 
     <Notification/>
 </div>
