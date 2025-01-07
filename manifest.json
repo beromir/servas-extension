@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Servas",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Extension for the bookmark manager Servas.",
     "action": {
         "default_popup": "dist/views/popup.html",
