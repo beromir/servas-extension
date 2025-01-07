@@ -18,7 +18,12 @@
         "activeTab",
         "storage"
     ],
-    "host_permissions": [],
+    "host_permissions": [
+        "*://*/*"
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self';"
+    },
     "icons": {
         "16": "assets/logo/icon_16.png",
         "32": "assets/logo/icon_32.png",
