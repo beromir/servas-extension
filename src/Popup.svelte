@@ -79,7 +79,7 @@
         </button>
 
         {#if options?.servasUrl}
-            <a href={options.servasUrl} title="Open Servas">
+            <a href={options.servasUrl} title="Open Servas" target="_blank">
                 <ArrowTopRightOnSquare className="size-4.5 fill-gray-500 hover:fill-gray-700 dark:fill-gray-400 dark:hover:fill-gray-200"/>
             </a>
         {/if}
