@@ -1,11 +1,11 @@
 <script lang="ts">
     import {toggleArrayValue} from "../utils/util";
     import {clickOutside} from "../actions/action";
-    import ChevronUpDown from "../heroicons/micro/ChevronUpDown.svelte";
-    import Check from "../heroicons/micro/Check.svelte";
+    import ChevronUpDown from "../icons/micro/ChevronUpDown.svelte";
+    import Check from "../icons/micro/Check.svelte";
     import Input from "./Input.svelte";
     import Label from "./Label.svelte";
-    import XMark from "../heroicons/micro/XMark.svelte";
+    import XMark from "../icons/micro/XMark.svelte";
     import clsx from "clsx";
 
     let {

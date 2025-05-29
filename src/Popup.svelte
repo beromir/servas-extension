@@ -1,9 +1,9 @@
 <script lang="ts">
-    import ArrowTopRightOnSquare from "./heroicons/micro/ArrowTopRightOnSquare.svelte";
-    import CogSixTooth from "./heroicons/micro/CogSixTooth.svelte";
+    import ArrowTopRightOnSquare from "./icons/micro/ArrowTopRightOnSquare.svelte";
+    import CogSixTooth from "./icons/micro/CogSixTooth.svelte";
     import {getOptions, setOption} from "./services/option";
     import Button from "./components/Button.svelte";
-    import Plus from "./heroicons/mini/Plus.svelte";
+    import Plus from "./icons/mini/Plus.svelte";
     import {getCurrentTab} from "./services/tab";
     import {getData, storeLink} from "./services/api";
     import Notification from "./components/Notification.svelte";
@@ -11,8 +11,8 @@
     import {dispatchCustomEvent} from "./utils/util";
     import Combobox from "./components/Combobox.svelte";
     import Input from "./components/Input.svelte";
-    import PlusMicro from "./heroicons/micro/Plus.svelte";
-    import Minus from "./heroicons/micro/Minus.svelte";
+    import PlusMicro from "./icons/micro/Plus.svelte";
+    import Minus from "./icons/micro/Minus.svelte";
     import {initTheme} from "./services/theme";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
