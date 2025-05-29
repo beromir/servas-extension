@@ -9,6 +9,7 @@
     import {changeTheme, initTheme} from "./services/theme.js";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
+    const appVersion = browserAPI.runtime.getManifest().version;
 
     let servasUrl: string = $state('');
     let apiToken: string = $state('');
@@ -79,7 +80,10 @@
     </main>
 
     <footer class="mt-40 py-3 text-sm text-gray-700 border-t border-gray-300 dark:text-gray-300 dark:border-gray-600">
-        v{browserAPI.runtime.getManifest().version}
+        <a href={'https://github.com/beromir/servas-extension/releases/tag/v' + appVersion} target="_blank"
+           class="hover:text-gray-800 dark:hover:text-gray-200">
+            v{appVersion}
+        </a>
     </footer>
 
     <Notification/>
