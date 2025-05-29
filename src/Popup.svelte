@@ -11,9 +11,9 @@
     import {dispatchCustomEvent} from "./utils/util";
     import Combobox from "./components/Combobox.svelte";
     import Input from "./components/Input.svelte";
-    import PlusMicro from "./icons/micro/Plus.svelte";
-    import Minus from "./icons/micro/Minus.svelte";
     import {initTheme} from "./services/theme";
+    import Expand from "./icons/micro/Expand.svelte";
+    import Shrink from "./icons/micro/Shrink.svelte";
 
     const browserAPI = globalThis.chrome || globalThis.browser;
 
@@ -74,13 +74,27 @@
 
 <div class="flex flex-col p-3 h-screen">
     <header class="flex items-center justify-between">
-        <button onclick={handleSettingsButtonClick} type="button" title="Settings">
-            <CogSixTooth className="fill-gray-500 hover:fill-gray-700 dark:fill-gray-400 dark:hover:fill-gray-200"/>
-        </button>
+        <div class="flex items-center gap-x-2.5">
+            <button onclick={handleSettingsButtonClick} type="button" title="Settings">
+                <CogSixTooth className="fill-gray-500 hover:fill-gray-700 dark:fill-gray-400 dark:hover:fill-gray-200"/>
+            </button>
+
+            <button onclick={handleToggleOptionsButtonClick} type="button"
+                    title={showOptions ? 'Hide options' : 'Show options'}
+                    class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                {#if showOptions}
+                    <Shrink/>
+
+                {:else}
+                    <Expand/>
+                {/if}
+            </button>
+        </div>
 
         {#if options?.servasUrl}
             <a href={options.servasUrl} title="Open Servas" target="_blank">
-                <ArrowTopRightOnSquare className="size-4.5 fill-gray-500 hover:fill-gray-700 dark:fill-gray-400 dark:hover:fill-gray-200"/>
+                <ArrowTopRightOnSquare
+                    className="size-4.5 fill-gray-500 hover:fill-gray-700 dark:fill-gray-400 dark:hover:fill-gray-200"/>
             </a>
         {/if}
     </header>
@@ -108,17 +122,6 @@
                 <Plus/>
                 Add page
             </Button>
-
-            <button onclick={handleToggleOptionsButtonClick} type="button"
-                    class="flex items-center gap-x-1 text-sm text-gray-600 font-medium tracking-tight group hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-500">
-                {#if showOptions}
-                    <Minus className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-400 dark:group-hover:fill-gray-500"/>
-
-                {:else}
-                    <PlusMicro className="fill-gray-700 group-hover:fill-gray-800 dark:fill-gray-400 dark:group-hover:fill-gray-500"/>
-                {/if}
-                {showOptions ? 'Hide options' : 'Show options'}
-            </button>
         </div>
     </main>
 
